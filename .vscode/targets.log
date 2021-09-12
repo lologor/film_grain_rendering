@@ -6,7 +6,7 @@
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Sep 12 21:50:59 2021
+# Make data base, printed on Sun Sep 12 22:56:40 2021
 
 # Variables
 
@@ -32,8 +32,7 @@ SNAP_COMMON = /var/snap/code/common
 XDG_SESSION_TYPE = x11
 # environment
 VSCODE_LOG_NATIVE = false
- 
-# makefile (from 'makefile', line 29)
+# makefile (from 'makefile', line 35)
 TARGET = $(BIN_DIR)/film_grain_rendering_main
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
@@ -41,6 +40,7 @@ TARGET = $(BIN_DIR)/film_grain_rendering_main
 IM_CONFIG_PHASE = 1
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
+ 
 # environment
 XAUTHORITY = /run/user/1500/gdm/Xauthority
 # environment
@@ -65,8 +65,6 @@ SNAP_INSTANCE_NAME = code
 SNAP_ARCH = amd64
 # makefile (from 'makefile', line 1)
 MAKEFILE_LIST :=  makefile
-# makefile (from 'makefile', line 6)
-LIB_DIR = lib
 # automatic
 @F = $(notdir $@)
 # environment
@@ -75,7 +73,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.deskto
 USERNAME = laurent
 # makefile (from 'makefile', line 4)
 OBJ_DIR = obj_$(OS)
-# makefile (from 'makefile', line 7)
+# makefile (from 'makefile', line 6)
 CXXOPT = -O3 -ftree-vectorize -funroll-loops
 # environment
 MAKELEVEL := 0
@@ -99,7 +97,7 @@ VSCODE_CWD = /home/laurent
 GSETTINGS_SCHEMA_DIR = /snap/code/73/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
-# makefile (from 'makefile', line 26)
+# makefile (from 'makefile', line 32)
 OBJ_FILES = $(addprefix $(OBJ_DIR)/,$(addsuffix .o, $(SRC_FILES)))
 # environment
 PATH = /home/laurent/.nimble/bin:/home/laurent/.local/bin:/home/laurent/bin:/home/laurent/.nimble/bin:/home/laurent/.local/bin:/home/laurent/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -125,8 +123,8 @@ DISABLE_WAYLAND = 1
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a82a52e4-68e3-49ac-80d8-c6f06b8cf33e&iid=a82a52e4-68e3-49ac-80d8-c6f06b8cf33e&sid=a82a52e4-68e3-49ac-80d8-c6f06b8cf33e","uploadToServer":true}
 # environment
 INVOCATION_ID = 79a1dd0271724ba2989ce71e3e5c84d9
-# makefile (from 'makefile', line 15)
-LDFLAGS = -lpng -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lgomp
+# makefile (from 'makefile', line 21)
+LDFLAGS = -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lomp
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/73/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -159,7 +157,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 SRC_DIR = src
 # environment
 GTK_MODULES = gail:atk-bridge
-# makefile (from 'makefile', line 14)
+# makefile (from 'makefile', line 20)
 CXXFLAGS = -std=c++11 -Wall -Wextra  -fopenmp
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
@@ -275,6 +273,8 @@ LC_NUMERIC = de_DE.UTF-8
 <F = $(notdir $<)
 # environment
 ELECTRON_RUN_AS_NODE = 1
+# makefile (from 'makefile', line 18)
+CXX = clang++
 # environment
 LC_MEASUREMENT = de_DE.UTF-8
 # environment
@@ -285,11 +285,9 @@ BIN_DIR = bin_$(OS)
 LC_ALL = C
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# makefile (from 'makefile', line 11)
-LIBS = 
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'makefile', line 24)
+# makefile (from 'makefile', line 30)
 SRC_FILES = $(patsubst $(SRC_DIR)/%.cpp,%,$(shell find $(SRC_DIR)/ -name '*.cpp' -type f)) $(patsubst $(SRC_DIR)/%.c,%,$(shell find $(SRC_DIR)/ -name '*.c' -type f))
 # default
 SUFFIXES := 
@@ -297,8 +295,8 @@ SUFFIXES :=
 SNAP_REEXEC = 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
-# makefile (from 'makefile', line 9)
-INCPATH = -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4
+# makefile (from 'makefile', line 8)
+INCPATH = -Isrc -I/usr/include/opencv4/opencv -I/usr/include/opencv4
 # environment
 WINDOWPATH = 2
 # default
@@ -314,7 +312,7 @@ LANG = C
 # environment
 VSCODE_PID = 11325
 # variable set hash-table stats:
-# Load=151/1024=15%, Rehash=0, Collisions=50/237=21%
+# Load=150/1024=15%, Rehash=0, Collisions=50/246=20%
 
 # Pattern-specific Variable Values
 
@@ -322,21 +320,21 @@ VSCODE_PID = 11325
 
 # Directories
 
-# . (device 66307, inode 46665803): 11 files, no impossibilities.
+# . (device 66307, inode 46665803): 12 files, no impossibilities.
 # src (device 66307, inode 46792760): 2 files, no impossibilities so far.
 
-# 13 files, no impossibilities in 2 directories.
+# 14 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj_Linux/%.o: src/%.cpp
-#  recipe to execute (from 'makefile', line 42):
+#  recipe to execute (from 'makefile', line 48):
 	@echo "===== Compile $< ====="
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(CXXOPT) $(INCPATH) -c $< -o $@
 
 obj_Linux/%.o: src/%.c
-#  recipe to execute (from 'makefile', line 47):
+#  recipe to execute (from 'makefile', line 53):
 	@echo "===== Compile $< ====="
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(CXXOPT) $(INCPATH) -c $< -o $@
@@ -351,7 +349,6 @@ obj_Linux/film_grain_rendering.o: src/film_grain_rendering.cpp
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
- 
 # automatic
 # @ := obj_Linux/film_grain_rendering.o
 # automatic
@@ -370,7 +367,7 @@ obj_Linux/film_grain_rendering.o: src/film_grain_rendering.cpp
 # ? := src/film_grain_rendering.cpp
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=3/20=15%
-#  recipe to execute (from 'makefile', line 42):
+#  recipe to execute (from 'makefile', line 48):
 	@echo "===== Compile $< ====="
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(CXXOPT) $(INCPATH) -c $< -o $@
@@ -393,18 +390,19 @@ all: bin_Linux/film_grain_rendering_main
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-12 21:50:51.556262323
+ 
+#  Last modified 2021-09-12 22:56:13.653068521
 #  File has been updated.
 #  Successfully updated.
 
-bin_Linux/film_grain_rendering_main: obj_Linux/film_grain_rendering.o obj_Linux/libtiff_io.o obj_Linux/pseudo_random_number_generator.o obj_Linux/matrix.o obj_Linux/film_grain_rendering_main.o obj_Linux/io_png.o
+bin_Linux/film_grain_rendering_main: obj_Linux/film_grain_rendering.o obj_Linux/pseudo_random_number_generator.o obj_Linux/matrix.o obj_Linux/image_io.o obj_Linux/film_grain_rendering_main.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/8=0%
-#  recipe to execute (from 'makefile', line 37):
+#  recipe to execute (from 'makefile', line 43):
 	@echo "===== Link $@ ====="
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(CXXOPT) -o $@ $^ $(LIBS) $(LDFLAGS)
@@ -416,19 +414,7 @@ obj_Linux/pseudo_random_number_generator.o:
 #  File has not been updated.
 
 # Not a target:
-obj_Linux/io_png.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 .DEFAULT:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-obj_Linux/libtiff_io.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -444,9 +430,15 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 52):
+#  recipe to execute (from 'makefile', line 58):
 	@echo "===== Clean $< ====="
 	@rm -rf $(BIN_DIR) $(OBJ_DIR)
+
+# Not a target:
+obj_Linux/image_io.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj_Linux/film_grain_rendering_main.o:
@@ -457,24 +449,24 @@ obj_Linux/film_grain_rendering_main.o:
 # Not a target:
 src/film_grain_rendering.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-12 21:03:22.483399428
+#  Last modified 2021-09-12 22:45:05.854882421
 #  File has been updated.
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/39=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/37=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 32 / storage = 531 B / avg = 16 B
-# current buf: size = 8162 B / used = 531 B / count = 32 / avg = 16 B
+# strcache buffers: 1 (0) / strings = 32 / storage = 521 B / avg = 16 B
+# current buf: size = 8162 B / used = 521 B / count = 32 / avg = 16 B
 
 # strcache performance: lookups = 47 / hit rate = 31%
 # hash-table stats:
 # Load=32/8192=0%, Rehash=0, Collisions=1/47=2%
-# Finished Make data base on Sun Sep 12 21:50:59 2021
+# Finished Make data base on Sun Sep 12 22:56:40 2021
 
  
