@@ -6,7 +6,7 @@
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Sep 12 21:30:21 2021
+# Make data base, printed on Sun Sep 12 21:50:59 2021
 
 # Variables
 
@@ -32,6 +32,7 @@ SNAP_COMMON = /var/snap/code/common
 XDG_SESSION_TYPE = x11
 # environment
 VSCODE_LOG_NATIVE = false
+ 
 # makefile (from 'makefile', line 29)
 TARGET = $(BIN_DIR)/film_grain_rendering_main
 # automatic
@@ -75,7 +76,7 @@ USERNAME = laurent
 # makefile (from 'makefile', line 4)
 OBJ_DIR = obj_$(OS)
 # makefile (from 'makefile', line 7)
-CXXOPT = -O2 -ftree-vectorize -funroll-loops
+CXXOPT = -O3 -ftree-vectorize -funroll-loops
 # environment
 MAKELEVEL := 0
 # environment
@@ -150,7 +151,6 @@ SNAP_INSTANCE_KEY =
 PWD = /home/laurent/Documents/Projects/CPP/film_grain_rendering
 # default
 .LOADED := 
- 
 # environment
 SSH_AGENT_PID = 2414
 # environment
@@ -322,10 +322,10 @@ VSCODE_PID = 11325
 
 # Directories
 
-# . (device 66307, inode 46665803): 10 files, no impossibilities.
+# . (device 66307, inode 46665803): 11 files, no impossibilities.
 # src (device 66307, inode 46792760): 2 files, no impossibilities so far.
 
-# 12 files, no impossibilities in 2 directories.
+# 13 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -351,6 +351,7 @@ obj_Linux/film_grain_rendering.o: src/film_grain_rendering.cpp
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
+ 
 # automatic
 # @ := obj_Linux/film_grain_rendering.o
 # automatic
@@ -392,7 +393,7 @@ all: bin_Linux/film_grain_rendering_main
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-12 21:30:16.929571626
+#  Last modified 2021-09-12 21:50:51.556262323
 #  File has been updated.
 #  Successfully updated.
 
@@ -468,12 +469,12 @@ src/film_grain_rendering.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 31 / storage = 520 B / avg = 16 B
-# current buf: size = 8162 B / used = 520 B / count = 31 / avg = 16 B
+# strcache buffers: 1 (0) / strings = 32 / storage = 531 B / avg = 16 B
+# current buf: size = 8162 B / used = 531 B / count = 32 / avg = 16 B
 
-# strcache performance: lookups = 46 / hit rate = 32%
+# strcache performance: lookups = 47 / hit rate = 31%
 # hash-table stats:
-# Load=31/8192=0%, Rehash=0, Collisions=1/46=2%
-# Finished Make data base on Sun Sep 12 21:30:21 2021
+# Load=32/8192=0%, Rehash=0, Collisions=1/47=2%
+# Finished Make data base on Sun Sep 12 21:50:59 2021
 
  

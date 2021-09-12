@@ -52,8 +52,8 @@
 #define PNG_SIG_LEN 4
 
 /* internal only data type identifiers */
-#define IO_PNG_U8  0x0001       /*  8bit unsigned integer */
-#define IO_PNG_F32 0x0002       /* 32bit float */
+#define IO_PNG_U8  0x0001   /*  8bit unsigned integer */
+#define IO_PNG_F32 0x0002   /* 32bit float */
 
 /*
  * INFO
@@ -112,7 +112,7 @@ static void _io_png_err_hdl(png_structp png_ptr, png_const_charp msg)
  *
  * @param fp file pointer to close, ignored if NULL
  * @param png_ptr_p, info_ptr_p, pointers to PNG structure pointers,
- *        ignored if NULL
+ * ignored if NULL
  * @return NULL
  */
 static void *_io_png_read_abort(FILE * fp,
@@ -132,12 +132,12 @@ static void *_io_png_read_abort(FILE * fp,
  *
  * @param fname PNG file name, "-" means stdin
  * @param nxp, nyp, ncp pointers to variables to be filled
- *        with the number of columns, lines and channels of the image
+ * with the number of columns, lines and channels of the image
  * @param png_transform a PNG_TRANSFORM flag to be added to the
- *        default libpng read transforms
+ * default libpng read transforms
  * @param dtype identifier for the data type to be used for output
  * @return pointer to an allocated array of pixels,
- *         or NULL if an error happens
+ * or NULL if an error happens
  */
 static void *io_png_read_raw(const char *fname,
                              size_t * nxp, size_t * nyp, size_t * ncp,
@@ -174,13 +174,13 @@ static void *io_png_read_raw(const char *fname,
 
     /* read in some of the signature bytes and check this signature */
     if ((PNG_SIG_LEN != fread(png_sig, 1, PNG_SIG_LEN, fp))
-        || 0 != png_sig_cmp(png_sig, (png_size_t) 0, PNG_SIG_LEN))
+            || 0 != png_sig_cmp(png_sig, (png_size_t) 0, PNG_SIG_LEN))
         return _io_png_read_abort(fp, NULL, NULL);
 
     /*
-     * create and initialize the png_struct
-     * with local error handling
-     */
+ * create and initialize the png_struct
+ * with local error handling
+ */
     if (NULL == (png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,
                                                   &err, &_io_png_err_hdl,
                                                   NULL)))
@@ -202,12 +202,12 @@ static void *io_png_read_raw(const char *fname,
     png_set_sig_bytes(png_ptr, PNG_SIG_LEN);
 
     /*
-     * set the read filter transforms, to get 8bit RGB whatever the
-     * original file may contain:
-     * PNG_TRANSFORM_STRIP_16      strip 16-bit samples to 8 bits
-     * PNG_TRANSFORM_PACKING       expand 1, 2 and 4-bit
-     *                             samples to bytes
-     */
+ * set the read filter transforms, to get 8bit RGB whatever the
+ * original file may contain:
+ * PNG_TRANSFORM_STRIP_16  strip 16-bit samples to 8 bits
+ * PNG_TRANSFORM_PACKING   expand 1, 2 and 4-bit
+ * samples to bytes
+ */
     png_transform |= (PNG_TRANSFORM_STRIP_16 | PNG_TRANSFORM_PACKING);
 
     /* read in the entire image at once */
@@ -220,11 +220,11 @@ static void *io_png_read_raw(const char *fname,
     row_pointers = png_get_rows(png_ptr, info_ptr);
 
     /*
-     * allocate the output data RGB array
-     * de-interlace and convert png RGB RGB RGB 8bit to RRR GGG BBB
-     * the image is de-interlaced layer after layer
-     * this generic loop also works for one single channel
-     */
+ * allocate the output data RGB array
+ * de-interlace and convert png RGB RGB RGB 8bit to RRR GGG BBB
+ * the image is de-interlaced layer after layer
+ * this generic loop also works for one single channel
+ */
     size = *nxp * *nyp * *ncp;
     switch (dtype) {
     case IO_PNG_U8:
@@ -282,9 +282,9 @@ static void *io_png_read_raw(const char *fname,
  *
  * @param fname PNG file name
  * @param nxp, nyp, ncp pointers to variables to be filled with the number of
- *        columns, lines and channels of the image
+ *columns, lines and channels of the image
  * @return pointer to an allocated unsigned char array of pixels,
- *         or NULL if an error happens
+ * or NULL if an error happens
  */
 unsigned char *io_png_read_u8(const char *fname,
                               size_t * nxp, size_t * nyp, size_t * ncp)
@@ -324,7 +324,7 @@ unsigned char *io_png_read_u8_rgb(const char *fname, size_t * nxp,
         /* resize the image */
         size = *nxp * *nyp;
         img = (unsigned char *)
-            realloc(img, 3 * size * sizeof(unsigned char));
+                realloc(img, 3 * size * sizeof(unsigned char));
         img_r = img;
         img_g = img + size;
         img_b = img + 2 * size;
@@ -365,26 +365,26 @@ unsigned char *io_png_read_u8_gray(const char *fname,
         unsigned char *img_r, *img_g, *img_b;
 
         /*
-         * RGB->gray conversion
-         * Y = (6968 * R + 23434 * G + 2366 * B) / 32768
-         * integer approximation of
-         * Y = Cr* R + Cg * G + Cb * B
-         * with
-         * Cr = 0.212639005871510
-         * Cg = 0.715168678767756
-         * Cb = 0.072192315360734
-         * derived from ITU BT.709-5 (Rec 709) sRGB and D65 definitions
-         * http://www.itu.int/rec/R-REC-BT.709/en
-         */
+ * RGB->gray conversion
+ * Y = (6968 * R + 23434 * G + 2366 * B) / 32768
+ * integer approximation of
+ * Y = Cr* R + Cg * G + Cb * B
+ * with
+ * Cr = 0.212639005871510
+ * Cg = 0.715168678767756
+ * Cb = 0.072192315360734
+ * derived from ITU BT.709-5 (Rec 709) sRGB and D65 definitions
+ * http://www.itu.int/rec/R-REC-BT.709/en
+ */
         size = *nxp * *nyp;
         img_r = img;
         img_g = img + size;
         img_b = img + 2 * size;
         for (i = 0; i < size; i++)
             /*
-             * if int type is less than 24 bits, we use long ints,
-             * guaranteed to be >=32 bit
-             */
+ * if int type is less than 24 bits, we use long ints,
+ * guaranteed to be >=32 bit
+ */
 #if (UINT_MAX>>24 == 0)
 #define CR 6968ul
 #define CG 23434ul
@@ -416,9 +416,9 @@ unsigned char *io_png_read_u8_gray(const char *fname,
  *
  * @param fname PNG file name
  * @param nxp, nyp, ncp pointers to variables to be filled with the number of
- *        columns, lines and channels of the image
+ *columns, lines and channels of the image
  * @return pointer to an allocated unsigned char array of pixels,
- *         or NULL if an error happens
+ * or NULL if an error happens
  */
 float *io_png_read_f32(const char *fname,
                        size_t * nxp, size_t * nyp, size_t * ncp)
@@ -493,15 +493,15 @@ float *io_png_read_f32_gray(const char *fname, size_t * nxp, size_t * nyp)
         float *img_r, *img_g, *img_b;
 
         /*
-         * RGB->gray conversion
-         * Y = Cr* R + Cg * G + Cb * B
-         * with
-         * Cr = 0.212639005871510
-         * Cg = 0.715168678767756
-         * Cb = 0.072192315360734
-         * derived from ITU BT.709-5 (Rec 709) sRGB and D65 definitions
-         * http://www.itu.int/rec/R-REC-BT.709/en
-         */
+ * RGB->gray conversion
+ * Y = Cr* R + Cg * G + Cb * B
+ * with
+ * Cr = 0.212639005871510
+ * Cg = 0.715168678767756
+ * Cb = 0.072192315360734
+ * derived from ITU BT.709-5 (Rec 709) sRGB and D65 definitions
+ * http://www.itu.int/rec/R-REC-BT.709/en
+ */
         size = *nxp * *nyp;
         img_r = img;
         img_g = img + size;
@@ -527,7 +527,7 @@ float *io_png_read_f32_gray(const char *fname, size_t * nxp, size_t * nyp)
  * @param fp file pointer to close, ignored if NULL
  * @param idata, row_pointers arrays to free, ignored if NULL
  * @param png_ptr_p, info_ptr_p, pointers to PNG structure pointers,
- *        ignored if NULL
+ *ignored if NULL
  * @return -1
  */
 static int _io_png_write_abort(FILE * fp,
@@ -604,9 +604,9 @@ static int io_png_write_raw(const char *fname, const void *data,
         return _io_png_write_abort(fp, idata, NULL, NULL, NULL);
 
     /*
-     * create and initialize the png_struct
-     * with local error handling
-     */
+ * create and initialize the png_struct
+ * with local error handling
+ */
     if (NULL == (png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING,
                                                    &err, &_io_png_err_hdl,
                                                    NULL)))
@@ -658,10 +658,10 @@ static int io_png_write_raw(const char *fname, const void *data,
     png_write_info(png_ptr, info_ptr);
 
     /*
-     * interlace and convert RRR GGG BBB to RGB RGB RGB
-     * the image is interlaced layer after layer
-     * this involves more memory exchange, but allows a generic loop
-     */
+ * interlace and convert RRR GGG BBB to RGB RGB RGB
+ * the image is interlaced layer after layer
+ * this involves more memory exchange, but allows a generic loop
+ */
     switch (dtype) {
     case IO_PNG_U8:
         data_u8 = (unsigned char *) data;
@@ -691,7 +691,7 @@ static int io_png_write_raw(const char *fname, const void *data,
                     /* pixel loop */
                     tmp = floor(*data_f32_ptr++ + .5);
                     *idata_ptr = (png_byte) (tmp < 0. ? 0. :
-                                             (tmp > 255. ? 255. : tmp));
+                                                        (tmp > 255. ? 255. : tmp));
                     idata_ptr += nc;
                 }
             }

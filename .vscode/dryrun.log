@@ -3,25 +3,27 @@ make: Entering directory '/home/laurent/Documents/Projects/CPP/film_grain_render
  
 echo "===== Compile src/film_grain_rendering.cpp ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/film_grain_rendering.cpp -o obj_Linux/film_grain_rendering.o
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/film_grain_rendering.cpp -o obj_Linux/film_grain_rendering.o
+ 
 echo "===== Compile src/libtiff_io.cpp ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/libtiff_io.cpp -o obj_Linux/libtiff_io.o
- 
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/libtiff_io.cpp -o obj_Linux/libtiff_io.o
 echo "===== Compile src/pseudo_random_number_generator.cpp ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/pseudo_random_number_generator.cpp -o obj_Linux/pseudo_random_number_generator.o
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/pseudo_random_number_generator.cpp -o obj_Linux/pseudo_random_number_generator.o
 echo "===== Compile src/matrix.cpp ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/matrix.cpp -o obj_Linux/matrix.o
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/matrix.cpp -o obj_Linux/matrix.o
 echo "===== Compile src/film_grain_rendering_main.cpp ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/film_grain_rendering_main.cpp -o obj_Linux/film_grain_rendering_main.o
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/film_grain_rendering_main.cpp -o obj_Linux/film_grain_rendering_main.o
+ 
 echo "===== Compile src/io_png.c ====="
 mkdir -p obj_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/io_png.c -o obj_Linux/io_png.o
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4 -c src/io_png.c -o obj_Linux/io_png.o
 echo "===== Link bin_Linux/film_grain_rendering_main ====="
 mkdir -p bin_Linux
-g++ -std=c++11 -Wall -Wextra  -fopenmp -O2 -ftree-vectorize -funroll-loops -o bin_Linux/film_grain_rendering_main obj_Linux/film_grain_rendering.o obj_Linux/libtiff_io.o obj_Linux/pseudo_random_number_generator.o obj_Linux/matrix.o obj_Linux/film_grain_rendering_main.o obj_Linux/io_png.o  -lpng -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lgomp
+ 
+g++ -std=c++11 -Wall -Wextra  -fopenmp -O3 -ftree-vectorize -funroll-loops -o bin_Linux/film_grain_rendering_main obj_Linux/film_grain_rendering.o obj_Linux/libtiff_io.o obj_Linux/pseudo_random_number_generator.o obj_Linux/matrix.o obj_Linux/film_grain_rendering_main.o obj_Linux/io_png.o  -lpng -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core -lgomp
 make: Leaving directory '/home/laurent/Documents/Projects/CPP/film_grain_rendering'
  
