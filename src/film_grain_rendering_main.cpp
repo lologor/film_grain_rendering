@@ -11,8 +11,7 @@
 #include <stdlib.h>
 #include <algorithm> 
 #include "matrix.h"
-#include "libtiff_io.h"
-#include "io_png.h"
+#include "image_io.h"
 #include "film_grain_rendering.h"
 
 
@@ -33,7 +32,7 @@ static void show_help() {
             << "-algorithmID : ID of the algorithm to use "
             << "(0 : pixel-wise, 1 : grain-wise)\n"
             << "-color : whether color grain is activated "
-            << "(0 : black-and-white, 1 : color, default : 1)"
+            << "(0 : black-and-white, 1 : color, default : 1)\n"
             << "-xA \n"
             << "-yA \n"
             << "-xB \n"
@@ -184,41 +183,19 @@ int write_output_image(float *imgOut, const std::string fileNameOut,
         std::cout<< "Error, unknown algorithm."<< std::endl;
         return(-1);
     }
-    std::string sAlgoName(bufferAlgoName);
-    std::string outputExtension(getFileExt(fileNameOut));
 
     //write output image
-    std::string fileNameOutFull = (char*)( (getFileName(fileNameOut)
-                                            + "." + outputExtension).c_str());
-    std::cout<< "output file name : "<< fileNameOutFull<< std::endl;
+    std::cout<< "output file name : "<< fileNameOut << std::endl;
 
-    if (strcmp((const char*)(outputExtension.c_str()),"tif")==0 )	//tiff files
-    {
-        if (write_tiff_image(imgOut,
-                             (unsigned int)filmGrainParams.nOut,
-                             (unsigned int) filmGrainParams.mOut,
-                             nChannels,
-                             (const char*)fileNameOutFull.c_str()) ==-1)
-        {
-            std::cout<< "Error, could not write the image file."<< std::endl;
-            return(-1);
-        }
-    }
-    else if (strcmp((const char*)(outputExtension.c_str()),"png")==0 ||
-             strcmp((const char*)(outputExtension.c_str()),"")==0)	//png files
-    {
-        if(0 != io_png_write_f32(fileNameOutFull.c_str(), imgOut,
-                                 filmGrainParams.nOut, filmGrainParams.mOut, nChannels))
-        {
-            std::cout<< "Error, could not write the image file."<< std::endl;
-            return(-1);
-        }
-    }
-    else
-    {
-        std::cout<< "Error, unknown output file extension."<< std::endl;
-        return(-1);
-    }
+		if (write_image(imgOut,
+													(unsigned int)filmGrainParams.nOut,
+													(unsigned int) filmGrainParams.mOut,
+													nChannels,
+													(const char*)fileNameOut.c_str()) ==-1)
+		{
+				std::cout<< "Error, could not write the image file."<< std::endl;
+				return(-1);
+		}
 
     return(0);
 }
@@ -251,31 +228,17 @@ int main(int argc, char* argv[])
     size_t widthIn, heightIn, nChannels;
 
     //check the extension of the input file
-    if (strcmp((const char*)(getFileExt(fileNameIn).c_str()),"tif")==0)
-    {
-        unsigned int widthTemp, heightTemp, nChannelsTemp;
-        imgInFloat = read_tiff_image((const char*)((fileNameIn).c_str()),
-                                     &widthTemp, &heightTemp, &nChannelsTemp);
-        widthIn = (size_t)widthTemp;
-        heightIn = (size_t)heightTemp;
-        nChannels = (size_t)nChannelsTemp;
-        if (imgInFloat == NULL)
-        {
-            std::cout<< "Error, could not read the image file."<< std::endl;
-            return(-1);
-        }
-    }
-    else if (strcmp((const char*)(getFileExt(fileNameIn).c_str()),"png")==0)
-    {
-        imgInFloat = io_png_read_f32((const char*)(fileNameIn.c_str()),
-                                     &widthIn, &heightIn, &nChannels);
-    }
-    else
-    {
-        std::cout<< "Unable to read the input image."<< std::endl;
-        return(-1);
-    }
-
+		unsigned int widthTemp, heightTemp, nChannelsTemp;
+		imgInFloat = read_image((const char*)((fileNameIn).c_str()),
+																	&widthTemp, &heightTemp, &nChannelsTemp);
+		if (imgInFloat == NULL)
+		{
+				std::cout<< "Error, could not read the image file."<< std::endl;
+				return(-1);
+		}
+		widthIn = (size_t)widthTemp;
+		heightIn = (size_t)heightTemp;
+		nChannels = (size_t)nChannelsTemp;
 
     //show help
     if(cmdOptionExists(argv, argv+argc, "-h"))

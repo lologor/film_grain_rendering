@@ -5,17 +5,17 @@
 #include <iostream>
 using namespace cv;
 
-#include "libtiff_io.h"
+#include "image_io.h"
 
 // Global variables
-Mat tifFile;
+Mat imgFile;
 
-float * read_tiff_image(const char* inputFile, unsigned int *widthOut,
+float * read_image(const char* inputFile, unsigned int *widthOut,
                         unsigned int *heightOut, unsigned int *nChannels)
 {
 
-    tifFile = imread(inputFile, IMREAD_UNCHANGED);
-    if(tifFile.empty())
+    imgFile = imread(inputFile, IMREAD_UNCHANGED);
+    if(imgFile.empty())
     {
         std::cout << "Error, could not read the input image." << std::endl;
         std::cout << "File name : " << inputFile << std::endl;
@@ -23,9 +23,9 @@ float * read_tiff_image(const char* inputFile, unsigned int *widthOut,
     }
 
     //get height and width of image
-    *widthOut = tifFile.cols;
-    *heightOut = tifFile.rows;
-    *nChannels = tifFile.channels();
+    *widthOut = imgFile.cols;
+    *heightOut = imgFile.rows;
+    *nChannels = imgFile.channels();
     *nChannels = (int)fmax((float)*nChannels,(float)1.0);
     *nChannels = (int)fmin((float)*nChannels,(float)MAX_CHANNELS);
 
@@ -44,8 +44,8 @@ float * read_tiff_image(const char* inputFile, unsigned int *widthOut,
         for (unsigned int j=0; j<width; j++)
             for (unsigned int c=0; c<(*nChannels); c++)
             {
-                Vec3w pixel = tifFile.at<Vec3w>(i, j);
-                //note, the libtiff stores the image from the bottom left as the origin
+                Vec3w pixel = imgFile.at<Vec3w>(i, j);
+                //note, the opencv stores the image from the bottom left as the origin and in BGR format
                 switch(c)
                 {
                 case 0: // Red
@@ -67,7 +67,7 @@ float * read_tiff_image(const char* inputFile, unsigned int *widthOut,
 }
 
 
-int write_tiff_image(float* inputImg, unsigned int n, unsigned int m,
+int write_image(float* inputImg, unsigned int n, unsigned int m,
                      unsigned int nChannels, const char* outputFile)
 {
     unsigned int width,height;
@@ -77,22 +77,22 @@ int write_tiff_image(float* inputImg, unsigned int n, unsigned int m,
     //Now writing image to the file one strip at a time
     for (unsigned int i = 0; i < height; i++)
     {
-        //copy the image information into a temporary buffer
+        //copy the image information into the image
         for (unsigned int j = 0; j < width; j++)
-        {	//the tiff stores the image info in the following order : RGB
+        {	
             for (unsigned int c = 0; c < nChannels; c++)
             {
-                // Vec3w pixel = tifFile.at<Vec3w>(i, j);
+                //note, the opencv stores the image from the bottom left as the origin and in BGR format
                 switch(c)
                 {
                 case 0: // Red
-                    tifFile.at<Vec3w>(i, j).val[2] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
+                    imgFile.at<Vec3w>(i, j).val[2] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
                     break;
                 case 1: // Green
-                    tifFile.at<Vec3w>(i, j).val[1] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
+                    imgFile.at<Vec3w>(i, j).val[1] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
                     break;
                 case 2: // Blue
-                    tifFile.at<Vec3w>(i, j).val[0] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
+                    imgFile.at<Vec3w>(i, j).val[0] = (unsigned short)(round( inputImg[j + i*width + c*width*height]) );
                     break;
                 default:
                     std::cout << "Error in reading the tiff file, too many channels." << std::endl;
@@ -102,6 +102,6 @@ int write_tiff_image(float* inputImg, unsigned int n, unsigned int m,
         }
     }
 
-    imwrite(outputFile, tifFile);
+    imwrite(outputFile, imgFile);
     return(0);
 }

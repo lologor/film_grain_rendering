@@ -1,6 +1,6 @@
 
-#ifndef LIBTIFF_IO_H
-#define LIBTIFF_IO_H
+#ifndef IMAGE_IO_H
+#define IMAGE_IO_H
 
 #include <iostream>
 #include <cmath>
@@ -9,9 +9,9 @@
 
 #define MAX_CHANNELS 3
 
-float* read_tiff_image(const char* inputFile, unsigned int *width,
+float* read_image(const char* inputFile, unsigned int *width,
                        unsigned int *height, unsigned int *nChannels);
 
-int write_tiff_image(float* inputImg, unsigned int n, unsigned int m,
+int write_image(float* inputImg, unsigned int n, unsigned int m,
                      unsigned int nChannels, const char* outputFile);
 #endif
