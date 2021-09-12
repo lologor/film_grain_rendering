@@ -1,5 +1,5 @@
 
-#include "libtiff_io.h"
+#include "image_io.h"
 #include "pseudo_random_number_generator.h"
 #include "film_grain_rendering.h"
 
