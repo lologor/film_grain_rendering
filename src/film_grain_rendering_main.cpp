@@ -1,4 +1,3 @@
-
 #include <string>
 #include <random>
 #include <chrono>
@@ -22,7 +21,7 @@ static void show_help();
 /// help on usage of inpainting code
 static void show_help() {
     std::cerr <<"\nFilm grain synthesis.\n"
-              << "Usage: " << " film_grain_rendering_main imgIn.tiff imgNameOut.tiff [options]\n\n"
+              << "Usage: " << " film_grain_rendering_main imgIn.tif imgNameOut.tif [options]\n\n"
               << "Options (default values in parentheses)\n"
               << "-r : Average grain size (0.05)\n"
 			  << "-sigmaR : Grain standard deviation factor. This is defined as a fraction of the average grain size.(0.0)\n"
@@ -133,7 +132,7 @@ std::string get_curr_dir() {
  * 
  */
  /**
-* @brief Write the output to a .tiff or .png image.
+* @brief Write the output to a .tif or .png image.
 *
 * @param imgOut output image to write
 * @param fileNameOut output file name
@@ -188,7 +187,7 @@ int write_output_image(float *imgOut, const std::string fileNameOut,
 	std::string fileNameOutFull = (char*)( (getFileName(fileNameOut) + "." + outputExtension) .c_str());
 	std::cout << "output file name : " << fileNameOutFull << std::endl;
 
-	if (strcmp((const char*)(outputExtension.c_str()),"tiff")==0 )	//tiff files
+	if (strcmp((const char*)(outputExtension.c_str()),"tif")==0 )	//tiff files
 	{
 		if (write_tiff_image(imgOut, (unsigned int)filmGrainParams.nOut,
 			(unsigned int) filmGrainParams.mOut, nChannels, (const char*)fileNameOutFull.c_str()) ==-1)
@@ -244,9 +243,9 @@ int main(int argc, char* argv[])
 	size_t widthIn, heightIn, nChannels;
 
 	//check the extension of the input file
-	if (strcmp((const char*)(getFileExt(fileNameIn).c_str()),"tiff")==0)
+	if (strcmp((const char*)(getFileExt(fileNameIn).c_str()),"tif")==0)
 	{
-		uint32 widthTemp, heightTemp, nChannelsTemp;
+		unsigned int widthTemp, heightTemp, nChannelsTemp;
 		imgInFloat = read_tiff_image((const char*)((fileNameIn).c_str()),
 			&widthTemp, &heightTemp, &nChannelsTemp);
 		widthIn = (size_t)widthTemp;
@@ -465,7 +464,7 @@ int main(int argc, char* argv[])
 			delete imgIn;
 			return(-1);
 		}
-		//put the output image back to [0, 255]
+		//put the output image back to [0, MAX_GREY_LEVEL]
 		imgOutTemp->multiply((float)(MAX_GREY_LEVEL+EPSILON_GREY_LEVEL));
 		
 		if (colourActivated>0) 	//colour grain

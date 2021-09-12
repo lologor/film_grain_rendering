@@ -1,0 +1,17 @@
+{
+    "makefile.configurations": [
+        {
+            "name": "OMP",
+            "makeArgs": ["OMP=1"]
+        }
+    ],
+    "makefile.makefilePath": "makefile",
+    "makefile.makePath": "/usr/bin/make",
+    "makefile.launchConfigurations": [
+    
+    ],
+    "C_Cpp.default.includePath": [
+        "/usr/include/opencv4/opencv",
+        "/usr/include/opencv4"
+    ]
+}

@@ -1,12 +1,13 @@
 ####### Variables
-BIN_DIR   = bin
-OBJ_DIR   = obj
+OS        = $(shell uname)
+BIN_DIR   = bin_$(OS)
+OBJ_DIR   = obj_$(OS)
 SRC_DIR   = src
 LIB_DIR   = lib
 CXXOPT    = -O2 -ftree-vectorize -funroll-loops#
 CXXFLAGS  =  -std=c++11 -Wall -Wextra # -g # 
-INCPATH   = -Isrc -I/usr/local/include/
-LDFLAGS   = -lpng -ltiff
+INCPATH   = -Isrc -I/usr/local/include/ -I/usr/include/opencv4/opencv -I/usr/include/opencv4
+LDFLAGS   = -lpng -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
 LIBS      =
 
 ifdef OMP

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"makefile.extensionOutputFolder": "./.vscode",
+		"makefile.configurations": [
+			{
+				"name": "OMP",
+				"makeArgs": ["OMP=1"]
+			}	
+		]
+	}
+}

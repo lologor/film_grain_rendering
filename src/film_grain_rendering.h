@@ -21,7 +21,7 @@
 	#define PIXEL_WISE 0
 	#define GRAIN_WISE 1
 
-	#define MAX_GREY_LEVEL 255
+	#define MAX_GREY_LEVEL 65355
 	#define EPSILON_GREY_LEVEL 0.1
 
 	template <typename T>
