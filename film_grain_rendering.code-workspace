@@ -11,6 +11,13 @@
 				"name": "OMP",
 				"makeArgs": ["OMP=1"]
 			}	
+		],
+		"makefile.launchConfigurations": [
+			{
+				"cwd": "/home/laurent/Documents/Projects/CPP/film_grain_rendering/bin_Linux",
+				"binaryPath": "/home/laurent/Documents/Projects/CPP/film_grain_rendering/bin_Linux/film_grain_rendering_main",
+				"binaryArgs": []
+			}
 		]
 	}
 }

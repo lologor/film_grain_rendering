@@ -2,7 +2,7 @@
 
 #include "pseudo_random_number_generator.h"
 
-/* 
+/*
  * From http://www.reedbeta.com/blog/2013/01/12/quick-and-easy-gpu-random-numbers-in-d3d11/
  * Same strategy as in Gabor noise by example
  * Apply hashtable to create cellseed
@@ -136,7 +136,6 @@ vec2d myrand_gaussian_vec2d(noise_prng *p)
     return(randOut);
 }
 
-
 /**
  *
  */
@@ -162,7 +161,7 @@ unsigned int my_rand_poisson(noise_prng *p, const float lambda, float prodIn)
     else
         prod = prodIn;
     float sum = prod;
-    while ( (u>sum) && (x<floor(10000.0f*lambda)))
+    while ( (u>sum) && (x<floor(10000.0f*lambda)) && (prod != 0))
     {
         x = x + 1u;
         prod = prod * lambda /((float) x);

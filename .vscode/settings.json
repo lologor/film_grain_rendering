@@ -13,5 +13,6 @@
     "C_Cpp.default.includePath": [
         "/usr/include/opencv4/opencv",
         "/usr/include/opencv4"
-    ]
+    ],
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

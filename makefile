@@ -3,8 +3,7 @@ OS        = $(shell uname)
 BIN_DIR   = bin_$(OS)
 OBJ_DIR   = obj_$(OS)
 SRC_DIR   = src
-CXXOPT    = -O3 -ftree-vectorize -funroll-loops#
-CXXFLAGS  = -std=c++11 -Wall -Wextra # -g # 
+CXXFLAGS  = -std=c++11 -Wall -Wextra -g # 
 INCPATH   = -Isrc -I/usr/include/opencv4/opencv -I/usr/include/opencv4
 LDFLAGS   = -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
 
@@ -13,14 +12,17 @@ ifdef OMP
 		CXX 	  = /usr/local/opt/llvm/bin/clang++
 		CXXFLAGS += --ld-path=/usr/local/opt/llvm/bin/ld64.lld -mlinker-version=450 -I/usr/local/opt/llvm/include -I/usr/local/include
 		LDFLAGS  += -v -L/usr/local/opt/llvm/lib -L/usr/local/lib
+	else
+		CXXFLAGS += -fopenmp
+		LDFLAGS += -lgomp
+		CXXOPT    = -O2 -ftree-vectorize -funroll-loops
 	endif
-	ifeq ($(OS),Linux)
-		CXX       = clang++
-	endif
-	CXXFLAGS += -fopenmp
-	LDFLAGS += -lomp
+#	ifeq ($(OS),Linux)
+#		CXX       = clang++
+#	endif
 else
-CXXFLAGS += -Wno-unknown-pragmas
+	CXXFLAGS += -Wno-unknown-pragmas
+	CXXOPT    = -O3 -ftree-vectorize -funroll-loops#
 endif
 
 ####### Files

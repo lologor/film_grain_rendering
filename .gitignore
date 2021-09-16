@@ -1,6 +1,4 @@
 bin_Linux/
 obj_Linux/
 output.tif
-.vscode/configurationCache.log
-.vscode/dryrun.log
-.vscode/targets.log
+.vscode/

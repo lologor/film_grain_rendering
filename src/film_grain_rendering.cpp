@@ -85,7 +85,7 @@ int choose_rendering_algorithm(const std::string& inputFile,
  *
  */
 /**
-* @brief Square distance 
+* @brief Square distance
 *
 * @param lambda parameter of the Poisson process
 * @param x1, y1 : x, y coordinates of the first point
@@ -301,9 +301,10 @@ matrix<float>* film_grain_rendering_pixel_wise(matrix<float> *imgIn,
 
     unsigned int i,j;
     float *pt,pix;
-#pragma omp parallel for schedule(dynamic,2) private(i,j,pt,pix) shared(imgOut)
+#pragma omp parallel for schedule(static) private(i,j,pt,pix) shared(imgOut)
     for (i=0; i<(unsigned int)imgOut->get_nrows(); i++)
     {
+        //std::cout << "Row: " << i << std::endl;
         for (j=0; j<(unsigned int)imgOut->get_ncols(); j++)
         {
             pt = (float*)imgIn->get_ptr();
@@ -331,7 +332,7 @@ matrix<float>* film_grain_rendering_pixel_wise(matrix<float> *imgIn,
  *
  */
 /**
-* @brief Generate local Boolean model information 
+* @brief Generate local Boolean model information
 *
 * @param lambda parameter of the Poisson process
 * @param r average grain radius
