@@ -4,16 +4,21 @@ BIN_DIR   = bin_$(OS)
 OBJ_DIR   = obj_$(OS)
 SRC_DIR   = src
 CXXFLAGS  = -std=c++11 -Wall -Wextra -g # 
-INCPATH   = -Isrc -I/usr/include/opencv4/opencv -I/usr/include/opencv4
+ifeq ($(OS),Darwin)
+	INCPATH   = -Isrc -I/opt/homebrew/include/opencv4/
+else
+	INCPATH	  = -Isrc -I/usr/include/opencv4/opencv -I/usr/include/opencv4
+endif
 LDFLAGS   = -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_core
-
+ifeq ($(OS),Darwin)
+        LDFLAGS  += -v -L/opt/homebrew/lib/
+endif
 ifdef OMP
+	CXXFLAGS += -Xpreprocessor -fopenmp
+	INCPATH += -I/opt/homebrew/include/
 	ifeq ($(OS),Darwin)
-		CXX 	  = /usr/local/opt/llvm/bin/clang++
-		CXXFLAGS += --ld-path=/usr/local/opt/llvm/bin/ld64.lld -mlinker-version=450 -I/usr/local/opt/llvm/include -I/usr/local/include
-		LDFLAGS  += -v -L/usr/local/opt/llvm/lib -L/usr/local/lib
+		LDFLAGS  += -lomp
 	else
-		CXXFLAGS += -fopenmp
 		LDFLAGS += -lgomp
 		CXXOPT    = -O2 -ftree-vectorize -funroll-loops
 	endif
