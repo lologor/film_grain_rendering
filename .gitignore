@@ -1,6 +1,5 @@
-bin_Linux/
-obj_Linux/
+bin*/
+obj*/
 output.tif
 .vscode/
-bin/
-obj/
+*.log
