@@ -41,7 +41,7 @@ int choose_rendering_algorithm(const std::string& inputFile,
             }
             else
             {
-                delete switchPoints;
+                delete[] switchPoints;
                 std::cout << "Error in choose_rendering_algorithm, ";
                 std::cout << "failure to read the switch point file." << std::endl;
                 return(PIXEL_WISE);
@@ -51,7 +51,7 @@ int choose_rendering_algorithm(const std::string& inputFile,
     }
     else
     {
-        delete switchPoints;
+        delete[] switchPoints;
         std::cout << "Error in choose_rendering_algorithm, ";
         std::cout << "failure to read the switch point file." << std::endl;
         return(PIXEL_WISE);
@@ -66,17 +66,17 @@ int choose_rendering_algorithm(const std::string& inputFile,
             //the standard deviation is small, so we use the pixel-wise algorithm
             if ( (sigmaR) <= switchPoints[2*i+1] )
             {
-                delete switchPoints;
+                delete[] switchPoints;
                 return(PIXEL_WISE);
             }
             else //the standard deviation is large, so we use the grain-wise algorithm
             {
-                delete switchPoints;
+                delete[] switchPoints;
                 return(GRAIN_WISE);
             }
         }
     }
-    delete switchPoints;
+    delete[] switchPoints;
     return(PIXEL_WISE);
 }
 
@@ -304,7 +304,6 @@ matrix<float>* film_grain_rendering_pixel_wise(matrix<float> *imgIn,
 #pragma omp parallel for schedule(static) private(i,j,pt,pix) shared(imgOut)
     for (i=0; i<(unsigned int)imgOut->get_nrows(); i++)
     {
-        //std::cout << "Row: " << i << std::endl;
         for (j=0; j<(unsigned int)imgOut->get_ncols(); j++)
         {
             pt = (float*)imgIn->get_ptr();
@@ -320,12 +319,10 @@ matrix<float>* film_grain_rendering_pixel_wise(matrix<float> *imgIn,
             imgOut->set_value(i,j,pix);
         }
     }
-
-    delete xGaussianList;
-    delete yGaussianList;
+    delete[] xGaussianList;
+    delete[] yGaussianList;
     return(imgOut);
 }
-
 
 
 /**
@@ -537,7 +534,7 @@ matrix<float>* film_grain_rendering_grain_wise(matrix<float> *imgIn,
     {
         delete imgTempptr[i];
     }
-    delete imgTempptr;
+    delete[] imgTempptr;
     return(imgOut);
 }
 

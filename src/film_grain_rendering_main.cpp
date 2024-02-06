@@ -149,35 +149,35 @@ int write_output_image(float *imgOut, const std::string fileNameOut,
     /*buffers for output file name*/
     //mean radius
     char bufferR [50];
-    sprintf (bufferR, "%0.3f", filmGrainParams.muR);
+    snprintf (bufferR, 50, "%0.3f", filmGrainParams.muR);
     std::string strR(bufferR);
 
     //standard deviation of the radius
     char bufferStd [50];
-    sprintf (bufferStd, "%0.4f", filmGrainParams.sigmaR);
+    snprintf (bufferStd, 50, "%0.4f", filmGrainParams.sigmaR);
     std::string strStd(bufferStd);
 
     //standard deviation of the blur kernel
     char bufferSigmaConv [50];
-    sprintf (bufferSigmaConv, "%0.4f", filmGrainParams.sigmaFilter);
+    snprintf (bufferSigmaConv, 50, "%0.4f", filmGrainParams.sigmaFilter);
     std::string strSigmaConv(bufferSigmaConv);
 
     //output zoom factor
     char bufferZoom [50];
-    sprintf (bufferZoom, "%0.4f", filmGrainParams.s);
+    snprintf (bufferZoom, 50, "%0.4f", filmGrainParams.s);
     std::string sZoomStr(bufferZoom);
 
     //number of Monte Carlo iterations
     char bufferNmonteCarlo [50];
-    sprintf (bufferNmonteCarlo, "%05d", filmGrainParams.NmonteCarlo);
+    snprintf (bufferNmonteCarlo, 50, "%05d", filmGrainParams.NmonteCarlo);
     std::string sNmonteCarloStr(bufferNmonteCarlo);
 
     //algorithm name: either grain-wise or pixel-wise
     char bufferAlgoName [50];
     if (filmGrainParams.algorithmID == 0)
-        sprintf (bufferAlgoName, "%s", "pixel_wise");
+        snprintf (bufferAlgoName, 50, "%s", "pixel_wise");
     else if (filmGrainParams.algorithmID == 1)
-        sprintf (bufferAlgoName, "%s", "grain_wise");
+        snprintf (bufferAlgoName, 50, "%s", "grain_wise");
     else
     {
         std::cout<< "Error, unknown algorithm."<< std::endl;
@@ -473,7 +473,7 @@ int main(int argc, char* argv[])
 
     delete imgInFloat;
     delete imgIn;
-    delete imgOut;
+    delete[] imgOut;
 
     gettimeofday(&end, NULL);
     double elapsedTime = (end.tv_sec  - start.tv_sec) +
