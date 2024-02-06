@@ -3,3 +3,4 @@ obj*/
 output.tif
 .vscode/
 *.log
+.DS_Store
